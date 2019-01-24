@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
+    public Text textScore;
+    public int score;
+    //--------------------------
     public GameObject contCoins;
     public float force;
     public bool changeDir;
@@ -22,9 +26,6 @@ public class Player : MonoBehaviour {
     {
         if (transform.position.y < -1)
         {
-            //this.transform.position = new Vector3(4.5f, 0.65f, 4.25f);
-            //rb.Sleep();
-            //dir = new Vector3(0, 0, 0);
             RestartGame();
         }
 
@@ -54,6 +55,8 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Coin")
         {
             other.gameObject.SetActive(false);
+            score = score + 10;
+            textScore.text = "Puntaje: " + score; 
         }
         if (other.gameObject.name == "Win")
         {
@@ -66,7 +69,7 @@ public class Player : MonoBehaviour {
         this.transform.position = new Vector3(4.5f, 0.65f, 4.25f);
         rb.Sleep();
         dir = new Vector3(0, 0, 0);
-
+        score = 0;
         for (int i = 0; i < contCoins.transform.GetChildCount(); i++) //contCoins.transform.GetChildCount()
         {
             contCoins.transform.GetChild(i).gameObject.SetActive(true);
